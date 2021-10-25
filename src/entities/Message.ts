@@ -1,16 +1,16 @@
 import {
-  Column,
-  CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryColumn,
-} from 'typeorm';
-import { v4 as uuid } from 'uuid';
+  CreateDateColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from "typeorm";
 
-import { User } from './User';
+import { v4 as uuid } from "uuid";
+import { User } from "./User";
 
-@Entity('messages')
+@Entity("messages")
 class Message {
   @PrimaryColumn()
   id: string;
@@ -21,7 +21,7 @@ class Message {
   @Column()
   text: string;
 
-  @JoinColumn({ name: 'user_id' })
+  @JoinColumn({ name: "user_id" })
   @ManyToOne(() => User)
   user: User;
 

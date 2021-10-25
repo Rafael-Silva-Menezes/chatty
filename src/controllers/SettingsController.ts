@@ -1,9 +1,8 @@
-import { Request, Response } from 'express';
-
-import { SettingsService } from '../services/SettingsService';
+import { Request, Response } from "express";
+import { SettingsService } from "../services/SettingsService";
 
 class SettingsController {
-  async create(request: Request, response: Response): Promise<Response> {
+  async create(request: Request, response: Response) {
     const { chat, username } = request.body;
 
     const settingsService = new SettingsService();
@@ -12,17 +11,14 @@ class SettingsController {
       const settings = await settingsService.create({ chat, username });
 
       return response.json(settings);
-    } catch (error) {
+    } catch (err) {
       return response.status(400).json({
-        message: error.message,
+        message: err.message,
       });
     }
   }
 
-  async findByUsername(
-    request: Request,
-    response: Response,
-  ): Promise<Response> {
+  async findByUsername(request: Request, response: Response) {
     const { username } = request.params;
 
     const settingsService = new SettingsService();
@@ -32,14 +28,13 @@ class SettingsController {
     return response.json(settings);
   }
 
-  async update(request: Request, response: Response): Promise<Response> {
+  async update(request: Request, response: Response) {
     const { username } = request.params;
     const { chat } = request.body;
 
     const settingsService = new SettingsService();
 
     const settings = await settingsService.update(username, chat);
-
     return response.json(settings);
   }
 }
